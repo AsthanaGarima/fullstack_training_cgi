@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--  <bean id = "person" class = "com.cgi.spring_core_demo.Person">
+<property name = "person_id" value = "101"/>
+<property name = "person_name" value = "abc"/>
+</bean>-->
+<bean name="coach" class="com.cgi.spring_core_demo.SwimmingCoach"></bean>
+</beans>
