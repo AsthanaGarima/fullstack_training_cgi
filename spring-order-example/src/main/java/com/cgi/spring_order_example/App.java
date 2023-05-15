@@ -54,28 +54,37 @@ public class App
         	
         	 case 1:
         		 getallorders();
+        		 break;
         	 case 2:
 //        	
         		 findOrderById();
+        		 break;
 //        		 
         	 case 3:
         		 createOrder();
+        		 break;
         	 case 4:
         		 maxOrderByValue();
+        		 break;
         	 case 5:
         		 minOrderByValue();
+        		 break;
         	 case 6:
 //        	
         		 updateOrderByName();
+        		 break;
         	 case 7:
         		 updateOrderByPrice();
+        		 break;
         	 case 8:
         		 deleteOrderById();
+        		 break;
         	 case 9:
         		 deleteAll();
+        		 break;
         	 }
         	 
-        	 break;
+        	
          }
          
          else {
