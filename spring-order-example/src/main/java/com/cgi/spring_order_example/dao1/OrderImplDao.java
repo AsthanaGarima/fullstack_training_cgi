@@ -157,12 +157,12 @@ public class OrderImplDao implements OrderDao{
 		PreparedStatement preparedStatement;
 		try {
 			Connection conn = datasource.getConnection();
-			preparedStatement = conn.prepareStatement("update order set orderid=(?),orderprice=(?)  where ordername=(?)");
+			preparedStatement = conn.prepareStatement("update orders set orderid=(?),ordername = (?), orderprice=(?) where ordername=(?)");
 		
 			preparedStatement.setInt(1, orderid);
 			preparedStatement.setString(2, ordernewname);
-//			preparedStatement.setInt(3, orderprice);
-			preparedStatement.setString(3, orderoldname);
+			preparedStatement.setInt(3, orderprice);
+			preparedStatement.setString(4, orderoldname);
 			preparedStatement.executeUpdate();
 		
 		} catch (SQLException e) {
@@ -180,7 +180,7 @@ public class OrderImplDao implements OrderDao{
 		PreparedStatement preparedStatement;
 		try {
 			Connection conn = datasource.getConnection();
-			preparedStatement = conn.prepareStatement("update order set orderid=(?), ordername=(?), orderprice=(?)  where orderprice=(?)");
+			preparedStatement = conn.prepareStatement("update orders set orderid=(?), ordername=(?), orderprice=(?)  where orderprice=(?)");
 		
 			preparedStatement.setInt(1, orderid);
 			preparedStatement.setString(2, ordername);
