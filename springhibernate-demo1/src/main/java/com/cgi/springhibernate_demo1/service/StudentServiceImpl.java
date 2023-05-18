@@ -2,6 +2,10 @@ package com.cgi.springhibernate_demo1.service;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.cgi.springhibernate_demo1.dao.StudentDao;
 import com.cgi.springhibernate_demo1.dao.StudentDaoImpl;
 import com.cgi.springhibernate_demo1.model.Student;
@@ -9,9 +13,12 @@ import com.cgi.springhibernate_demo1.model.Student;
 public class StudentServiceImpl implements StudentService {
 	
     private StudentDao studentDao;
-    {
-    	studentDao = new StudentDaoImpl();
-    }
+    
+    @Autowired
+	public StudentServiceImpl(StudentDao studentDao) {
+		super();
+		this.studentDao = studentDao;
+	}
 	
 	public Student createStudents(Student student) {
 		// TODO Auto-generated method stub

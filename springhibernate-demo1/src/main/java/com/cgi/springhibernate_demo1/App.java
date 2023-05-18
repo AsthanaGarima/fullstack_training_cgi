@@ -9,7 +9,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.cgi.springhibernate_demo1.config.SpringConfig;
+import com.cgi.springhibernate_demo1.dao.StudentDao;
+import com.cgi.springhibernate_demo1.dao.StudentDaoImpl;
 import com.cgi.springhibernate_demo1.model.Student;
+import com.cgi.springhibernate_demo1.service.StudentService;
 import com.cgi.springhibernate_demo1.service.StudentServiceImpl;
 
 /**
@@ -21,7 +24,9 @@ public class App
 	static Scanner scanner = new Scanner(System.in);
     public static void main( String[] args )
     {
-      StudentServiceImpl studentserviceimpl = new StudentServiceImpl();
+    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    	StudentDao studentService = context.getBean("studentDao", StudentDaoImpl.class);
+    	
       System.out.println("Choose operations") ;
       System.out.println("1: create student");
       System.out.println("2: get student");
@@ -33,27 +38,27 @@ public class App
       Integer option = scanner.nextInt();
       switch(option) {
       case 1:
-    	  createStudent(studentserviceimpl);
+    	  createStudent(studentService);
     	  break;
       case 2:
-    	  getAllStudent(studentserviceimpl);
+    	  getAllStudent(studentService);
     	  break;
       case 3:
-    	  getAllStudentById(studentserviceimpl);
+    	  getAllStudentById(studentService);
     	  break;
       case 4:
-    	  updateAllStudentById(studentserviceimpl);
+    	  updateAllStudentById(studentService);
     	  break;
       case 5:
-    	  deleteAllStudentById(studentserviceimpl);
+    	  deleteAllStudentById(studentService);
     	  break;
       case 6:
-    	  deleteAllStudent(studentserviceimpl);
+    	  deleteAllStudent(studentService);
     	  break;
       }
     }
     
-    public static void createStudent(StudentServiceImpl studentserviceimpl) {
+    public static void createStudent(StudentDao studentService) {
     	System.out.println("enter id") ;
     	Integer id = scanner.nextInt();
     	System.out.println("enter first name") ;
@@ -64,20 +69,20 @@ public class App
     	String email = scanner.next();
     	
     	Student student = new Student(id, firstname, lastname, email);
-        studentserviceimpl.createStudents(student);
+    	studentService.createStudent(student);
     }
     
-    public static void getAllStudent(StudentServiceImpl studentserviceimpl) {
-    	studentserviceimpl.getStudents();
+    public static void getAllStudent(StudentDao studentService) {
+    	studentService.getStudent();
     }
     
-    public static void getAllStudentById(StudentServiceImpl studentserviceimpl) {
+    public static void getAllStudentById(StudentDao studentService) {
     	System.out.println("enter id") ;
     	Integer id = scanner.nextInt();
-    	studentserviceimpl.getStudentsById(id);
+    	studentService.getStudentById(id);
     }
     
-    public static void updateAllStudentById(StudentServiceImpl studentserviceimpl) {
+    public static void updateAllStudentById(StudentDao studentService) {
     	System.out.println("enter id") ;
     	Integer id = scanner.nextInt();
     	System.out.println("enter first name") ;
@@ -86,16 +91,16 @@ public class App
     	String lastname = scanner.next();
     	System.out.println("enter email") ;
     	String email = scanner.next();
-    	studentserviceimpl.updateStudentsById(id, firstname, lastname, email);
+    	studentService.updateStudentById(id, firstname, lastname, email);
     }
     
-    public static void deleteAllStudentById(StudentServiceImpl studentserviceimpl) {
+    public static void deleteAllStudentById(StudentDao studentService) {
     	System.out.println("enter id") ;
     	Integer id = scanner.nextInt();
-    	studentserviceimpl.deleteStudentsById(id);
+    	studentService.deleteById(id);
     }
     
-    public static void deleteAllStudent(StudentServiceImpl studentserviceimpl) {
-    	studentserviceimpl.deleteAllStudents();
+    public static void deleteAllStudent(StudentDao studentService) {
+    	studentService.deleteAll();
     }
 }
