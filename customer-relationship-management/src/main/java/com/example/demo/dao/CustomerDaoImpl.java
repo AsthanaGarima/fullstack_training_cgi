@@ -10,12 +10,15 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import com.example.demo.model.Customer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Repository
 @EnableTransactionManagement
 public class CustomerDaoImpl implements CustomerDao{
 	
 	public final SessionFactory sessionFactory;
+	
 
 	public CustomerDaoImpl(SessionFactory sessionFactory) {
 		super();
@@ -32,4 +35,35 @@ public class CustomerDaoImpl implements CustomerDao{
 		return customers;
 	}
 
-}
+	@Override
+	@Transactional
+	public Customer createCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		session.save(customer);
+		return customer;
+	}
+
+	
+	public Customer findCustomer(int id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Customer customer = session.find(Customer.class, id);
+		return customer;
+		
+	}
+	public Customer updateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		session.merge(customer);
+		return customer;
+	}
+
+	
+	
+		
+	}
+	
+	
+
+

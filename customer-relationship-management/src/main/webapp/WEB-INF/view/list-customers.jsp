@@ -5,7 +5,6 @@
 <html>
 <head><%@ page isELIgnored="false" %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>javaguides.net</title>
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-3.7.0.min.js" />"></script>
@@ -14,8 +13,13 @@
 <body>
 	<div class="container">
 		<div class="col-md-offset-1 col-md-10">
-			<h2>CRM - Customer Relationship Manager</h2>
+			<h2><font color='red'>CRM - Customer Relationship Manager</font></h2>
 			<hr />
+<input type="button" value="Add Customer"
+				onclick="window.location.href='showForm'; return false;"
+				class="btn btn-primary" />
+				<br/><br/>
+			
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">Customer List</div>
@@ -26,20 +30,32 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email</th>
-							
+							<th>Action</th>
 						</tr>
 
 						<!-- loop over and print our customers -->
 						<c:forEach var="tempCustomer" items="${customers}">
 
-							
-
+							<!-- construct an "update" link with customer id -->
+							<c:url var="updateLink" value="/updateForm">
+								<c:param name="customerId" value="${tempCustomer.id}" />
+							</c:url>
+							<!-- construct an "delete" link with customer id -->
+							<c:url var="deleteLink" value="/delete">
+								<c:param name="customerId" value="${tempCustomer.id}" />
+							</c:url>
 							<tr>
+							
 								<td>${tempCustomer.firstname}</td>
 								<td>${tempCustomer.lastname}</td>
 								<td>${tempCustomer.email}</td>
 
-								
+								<td>
+									<!-- display the update link -->
+									 <a href="${updateLink}">Update</a>
+									| <a href="${deleteLink}"
+									onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+								</td>
 
 							</tr>
 
