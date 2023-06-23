@@ -27,24 +27,32 @@ public class TodoServiceImpl implements TodoService {
 		return todoRepository.findAll();
 	}
 
-	@Override
-	public Optional<Todo> updateByIdTodo(int id, Todo todo) {
-		Todo value = null;
-		// TODO Auto-generated method stub
-		Optional<Todo> todos = todoRepository.findById(id);
-		
-		if (todos.get().getToDoId() == id) {
-			todos.get().setToDoName(todo.getToDoName());
-			todos.get().setIsCompleted(todo.getIsCompleted());
-			
-			
-			
-			  return todos;
-		}
-		else {
-			return null;
-		}
 	
-	}
+	@Override
+	public Todo updateByIdTodo(int id, Todo Todo) {
+		// TODO Auto-generated method stub
+		Optional<Todo> todoFromDb = todoRepository.findById(id);
 
+		 
+
+        if (todoFromDb.isPresent()) {
+
+            Todo t = todoFromDb.get();
+
+            t.setToDoName(Todo.getToDoName());
+
+            t.setIsCompleted(Todo.getIsCompleted());
+
+            return todoRepository.save(t);
+
+        } else
+
+            return null;
+
+    
+	}
+	
+	public void deleteTodoById(int id) {
+		todoRepository.deleteById(id);
+	}
 }

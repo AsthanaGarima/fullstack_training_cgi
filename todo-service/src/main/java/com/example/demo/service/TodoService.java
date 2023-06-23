@@ -10,6 +10,7 @@ public interface TodoService {
 	
 	public  Iterable<Todo> fetchAllToDos();
 	
-	public Optional<Todo> updateByIdTodo(int id, Todo Todo);
+	public Todo updateByIdTodo(int id, Todo Todo);
+	public void deleteTodoById(int id);
 
 }
