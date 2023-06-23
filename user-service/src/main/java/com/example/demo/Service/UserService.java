@@ -13,5 +13,4 @@ public interface UserService {
 	
 	public UserResponseModel getUsersById(int id);
 	
-
 }

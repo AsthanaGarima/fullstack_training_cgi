@@ -39,7 +39,14 @@ public class UserController {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorModel);
 	}
-	
+//	@ExceptionHandler(value = MyCustumException.class)
+//	public ResponseEntity<ErrorModel> handleIdNotFoundException(MyCustmException e) {
+//		ErrorModel errorModel = new ErrorModel(HttpStatus.NOT_FOUND.value(), e.getMessage(),
+//				System.currentTimeMillis());
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorModel);
+//
+//	}
+//	
 	@PostMapping
 	public ResponseEntity<UserResponseModel> createUser(@RequestBody UserRequestModel requestModel)
 	{
@@ -72,25 +79,6 @@ public class UserController {
 		return ResponseEntity.ok(models);
 	}
 	
-	@GetMapping("/find/{id}")
-	public ResponseEntity<?> getUsersById(@PathVariable("id") Integer id)throws NumberFormatException{
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//		
-		System.out.println(id);
-		UserResponseModel val = userService.getUsersById(id);
-		
-		if (val==null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user with id: "+id+" not found");
-		
-		}
-		
-		else {
-		return ResponseEntity.status(HttpStatus.OK).body(val);
-		}
-	
-
-	
-	}
 	
 
 }
